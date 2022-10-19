@@ -1,4 +1,6 @@
 """
+18th october
+---
 Given a list, find the k-th largest element in the list.
 
 Input: list = [3, 5, 2, 4, 6, 8], k = 3
