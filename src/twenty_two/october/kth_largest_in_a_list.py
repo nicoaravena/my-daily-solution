@@ -15,7 +15,3 @@ def find_kth_largest(nums: list, k: int) -> int:
         highest = max(nums)
         nums.remove(highest)
     return highest
-
-
-print(find_kth_largest([3, 5, 2, 4, 6, 8], 3))
-# 5
