@@ -2,33 +2,34 @@
 Testing file for problems from october 2022
 """
 
-from src.twenty_two.october.edit_distance import distance
-from src.twenty_two.october.rotate_matrix import rotate
-from src.twenty_two.october.maximum_in_a_stack import MaxStack
-from src.twenty_two.october.kth_largest_in_a_list import find_kth_largest
-from src.twenty_two.october.linked_list_is_palindrome import Node, is_palindrome
+from src.twenty_two.october import edit_distance
+from src.twenty_two.october import find_subtree
+from src.twenty_two.october import rotate_matrix
+from src.twenty_two.october import maximum_in_a_stack
+from src.twenty_two.october import kth_largest_in_a_list
+from src.twenty_two.october import linked_list_is_palindrome
 
 
 def test_distance():
-    assert distance('biting', 'sitting') == 2
-    assert distance('billing', 'sitting') == 3
-    assert distance('silling', 'sitting') == 2
-    assert distance('asdf', 'qwer') == 4
+    assert edit_distance.distance('biting', 'sitting') == 2
+    assert edit_distance.distance('billing', 'sitting') == 3
+    assert edit_distance.distance('silling', 'sitting') == 2
+    assert edit_distance.distance('asdf', 'qwer') == 4
 
 
 def test_rotate():
     mat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    rotated_mat = rotate(mat)
+    rotated_mat = rotate_matrix.rotate(mat)
     result = [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
     assert rotated_mat == result
 
 
 def test_find_kth_largest():
-    assert find_kth_largest([3, 5, 2, 4, 6, 8], 3) == 5
+    assert kth_largest_in_a_list.find_kth_largest([3, 5, 2, 4, 6, 8], 3) == 5
 
 
 def test_max_stack():
-    s = MaxStack()
+    s = maximum_in_a_stack.MaxStack()
     s.push(1)
     s.push(2)
     s.push(3)
@@ -40,24 +41,58 @@ def test_max_stack():
 
 
 def test_is_palindrome():
-    node = Node("a")
-    node.next = Node("b")
+    node = linked_list_is_palindrome.Node("a")
+    node.next = linked_list_is_palindrome.Node("b")
     node.next.prev = node
-    node.next.next = Node("b")
+    node.next.next = linked_list_is_palindrome.Node("b")
     node.next.next.prev = node.next
-    node.next.next.next = Node("a")
+    node.next.next.next = linked_list_is_palindrome.Node("a")
     node.next.next.next.prev = node.next.next
 
-    assert is_palindrome(node)
+    assert linked_list_is_palindrome.is_palindrome(node)
 
 
 def test_is_not_palindrome():
-    node = Node("a")
-    node.next = Node("b")
+    node = linked_list_is_palindrome.Node("a")
+    node.next = linked_list_is_palindrome.Node("b")
     node.next.prev = node
-    node.next.next = Node("c")
+    node.next.next = linked_list_is_palindrome.Node("c")
     node.next.next.prev = node.next
-    node.next.next.next = Node("a")
+    node.next.next.next = linked_list_is_palindrome.Node("a")
     node.next.next.next.prev = node.next.next
 
-    assert not is_palindrome(node)
+    assert not linked_list_is_palindrome.is_palindrome(node)
+
+
+def test_find_subtree_true_on_left():
+    t3 = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    t2 = find_subtree.Node(5, find_subtree.Node(4), find_subtree.Node(-1))
+    t = find_subtree.Node(1, t3, t2)
+
+    s = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    assert find_subtree.find_subtree(s, t)
+
+
+def test_find_subtree_true_on_right():
+    t3 = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    t2 = find_subtree.Node(5, find_subtree.Node(4), find_subtree.Node(-1))
+    t = find_subtree.Node(1, t2, t3)
+
+    s = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    assert find_subtree.find_subtree(s, t)
+
+
+def test_find_subtree_true_on_left_with_right_none():
+    t2 = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    t = find_subtree.Node(1, t2, None)
+
+    s = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    assert find_subtree.find_subtree(s, t)
+
+
+def test_find_subtree_true_on_right_wih_left_none():
+    t2 = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    t = find_subtree.Node(1, None, t2)
+
+    s = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
+    assert find_subtree.find_subtree(s, t)
