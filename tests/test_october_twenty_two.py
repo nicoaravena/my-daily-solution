@@ -2,9 +2,25 @@
 Testing file for problems from october 2022
 """
 
+from src.twenty_two.october.edit_distance import distance
+from src.twenty_two.october.rotate_matrix import rotate
 from src.twenty_two.october.maximum_in_a_stack import MaxStack
 from src.twenty_two.october.kth_largest_in_a_list import find_kth_largest
 from src.twenty_two.october.linked_list_is_palindrome import Node, is_palindrome
+
+
+def test_distance():
+    assert distance('biting', 'sitting') == 2
+    assert distance('billing', 'sitting') == 3
+    assert distance('silling', 'sitting') == 2
+    assert distance('asdf', 'qwer') == 4
+
+
+def test_rotate():
+    mat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    rotated_mat = rotate(mat)
+    result = [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+    assert rotated_mat == result
 
 
 def test_find_kth_largest():
