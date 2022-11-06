@@ -8,6 +8,7 @@ from src.twenty_two.october import rotate_matrix
 from src.twenty_two.october import maximum_in_a_stack
 from src.twenty_two.october import kth_largest_in_a_list
 from src.twenty_two.october import linked_list_is_palindrome
+from src.twenty_two.october import sorted_square_numbers
 
 
 def test_distance():
@@ -96,3 +97,12 @@ def test_find_subtree_true_on_right_wih_left_none():
 
     s = find_subtree.Node(4, find_subtree.Node(3), find_subtree.Node(2))
     assert find_subtree.find_subtree(s, t)
+
+
+def test_sorted_square_numbers():
+    result = sorted_square_numbers.square_numbers([-5, -3, -2, -1, 0, 1, 4, 5])
+    assert isinstance(result, list)
+    assert result == [0, 1, 1, 4, 9, 16, 25, 25]
+    result = sorted_square_numbers.square_numbers([-5, -3, -1, 0, 1, 4, 5])
+    assert isinstance(result, list)
+    assert result == [0, 1, 1, 9, 16, 25, 25]
