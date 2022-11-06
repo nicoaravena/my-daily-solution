@@ -9,6 +9,7 @@ from src.twenty_two.october import maximum_in_a_stack
 from src.twenty_two.october import kth_largest_in_a_list
 from src.twenty_two.october import linked_list_is_palindrome
 from src.twenty_two.october import sorted_square_numbers
+from src.twenty_two.october import clone_trees
 
 
 def test_distance():
@@ -106,3 +107,60 @@ def test_sorted_square_numbers():
     result = sorted_square_numbers.square_numbers([-5, -3, -1, 0, 1, 4, 5])
     assert isinstance(result, list)
     assert result == [0, 1, 1, 9, 16, 25, 25]
+
+
+def test_clone_trees():
+    a = clone_trees.Node(1)
+    a.left = clone_trees.Node(2)
+    a.right = clone_trees.Node(3)
+    a.right.left = clone_trees.Node(4)
+    a.right.right = clone_trees.Node(5)
+
+    b = clone_trees.Node(1)
+    b.left = clone_trees.Node(2)
+    b.right = clone_trees.Node(3)
+    b.right.left = clone_trees.Node(4)
+    b.right.right = clone_trees.Node(5)
+
+    assert clone_trees.find_node(a, b, a.left) == 2
+    assert clone_trees.find_node(a, b, a.right) == 3
+    assert clone_trees.find_node(a, b, a.right.left) == 4
+    assert clone_trees.find_node(a, b, a.right.right) == 5
+
+
+def test_clone_trees_other_side():
+    a = clone_trees.Node(1)
+    a.right = clone_trees.Node(2)
+    a.left = clone_trees.Node(3)
+    a.left.left = clone_trees.Node(4)
+
+    b = clone_trees.Node(1)
+    b.right = clone_trees.Node(2)
+    b.left = clone_trees.Node(3)
+    b.left.left = clone_trees.Node(4)
+
+    assert clone_trees.find_node(a, b, a.right) == 2
+    assert clone_trees.find_node(a, b, a.left) == 3
+    assert clone_trees.find_node(a, b, a.left.left) == 4
+
+
+def test_clone_trees_with_repeated_values():
+    a = clone_trees.Node(1)
+    a.left = clone_trees.Node(4)
+    a.left.right = clone_trees.Node(2)
+    a.right = clone_trees.Node(3)
+    a.right.left = clone_trees.Node(4)
+    a.right.right = clone_trees.Node(5)
+
+    b = clone_trees.Node(1)
+    b.left = clone_trees.Node(4)
+    b.left.right = clone_trees.Node(2)
+    b.right = clone_trees.Node(3)
+    b.right.left = clone_trees.Node(4)
+    b.right.right = clone_trees.Node(5)
+
+    assert clone_trees.find_node(a, b, a.left) == 4
+    assert clone_trees.find_node(a, b, a.right) == 3
+    assert clone_trees.find_node(a, b, a.left.right) == 2
+    assert clone_trees.find_node(a, b, a.right.left) == 4
+    assert clone_trees.find_node(a, b, a.right.right) == 5
