@@ -10,13 +10,14 @@ from src.twenty_two.october import kth_largest_in_a_list
 from src.twenty_two.october import linked_list_is_palindrome
 from src.twenty_two.october import sorted_square_numbers
 from src.twenty_two.october import clone_trees
+from src.twenty_two.october import concatenated_words
 
 
 def test_distance():
-    assert edit_distance.distance('biting', 'sitting') == 2
-    assert edit_distance.distance('billing', 'sitting') == 3
-    assert edit_distance.distance('silling', 'sitting') == 2
-    assert edit_distance.distance('asdf', 'qwer') == 4
+    assert edit_distance.distance("biting", "sitting") == 2
+    assert edit_distance.distance("billing", "sitting") == 3
+    assert edit_distance.distance("silling", "sitting") == 2
+    assert edit_distance.distance("asdf", "qwer") == 4
 
 
 def test_rotate():
@@ -164,3 +165,10 @@ def test_clone_trees_with_repeated_values():
     assert clone_trees.find_node(a, b, a.left.right) == 2
     assert clone_trees.find_node(a, b, a.right.left) == 4
     assert clone_trees.find_node(a, b, a.right.right) == 5
+
+
+def test_concatenated_words():
+    input = ["tech", "lead", "techlead", "cat", "cats", "dog", "catsdog"]
+
+    result = concatenated_words.Solution().find_all_concatenated_words_in_a_dict(input)
+    assert result == ["techlead", "catsdog"]
